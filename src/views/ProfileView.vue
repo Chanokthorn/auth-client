@@ -1,7 +1,7 @@
 <script setup>
 import AuthGuard from '@/components/AuthGuard.vue';
 import { PageSignIn } from '@/router';
-import AuthService from '@/services/AuthService';
+import AuthService from '@/services/authService';
 import { AuthStore } from '@/stores/AuthStore';
 import { useRouter } from 'vue-router';
 

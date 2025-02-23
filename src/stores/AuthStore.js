@@ -1,6 +1,6 @@
 import { ref } from "vue";
 import { defineStore } from "pinia";
-import AuthService from "@/services/AuthService";
+import AuthService from "@/services/authService";
 
 export const AuthStore = defineStore("authenStore", () => {
     const isAuthenticated = ref(false);

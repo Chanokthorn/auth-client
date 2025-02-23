@@ -1,7 +1,7 @@
 <script setup>
 // import { signinUsernamePassword, signout } from '@/services/authService'
 import { PageProfile } from '@/router'
-import authService from '@/services/AuthService'
+import authService from '@/services/authService'
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 
