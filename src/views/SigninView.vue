@@ -1,7 +1,9 @@
 <script setup>
 // import { signinUsernamePassword, signout } from '@/services/authService'
-import authService from '@/services/authService'
+import { PageProfile } from '@/router'
+import authService from '@/services/AuthService'
 import { ref } from 'vue'
+import { useRouter } from 'vue-router'
 
 const apiKey = ref('')
 const username = ref('')
@@ -10,6 +12,7 @@ const isLoading = ref(false)
 
 // read redirect query parameter
 const redirect = new URLSearchParams(window.location.search).get('redirect')
+const router = useRouter();
 
 const handleLogin = async () => {
     isLoading.value = true
@@ -23,6 +26,8 @@ const handleLogin = async () => {
 
     if (redirect && redirect !== "") {
         window.location.href = redirect
+    } else {
+        router.push({name: PageProfile})
     }
 }
 
