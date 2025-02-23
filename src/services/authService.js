@@ -2,7 +2,7 @@ import { AUTH_API_URL } from '@/config.js';
 
 const signinUsernamePassword = async (apiKey, username, password) => {
     try {
-        const response = await fetch(`${AUTH_API_URL}/signin/username_password`, {
+        const response = await fetch(`${AUTH_API_URL}/users/signin/username_password`, {
             method: 'POST',
             credentials: 'include',
             headers: {
@@ -19,24 +19,46 @@ const signinUsernamePassword = async (apiKey, username, password) => {
     return
 };
 
-const signout = () => {
-    localStorage.removeItem('user');
+const getUserProfile = async () => {
+    var response;
+    try {
+        response = await fetch(`${AUTH_API_URL}/profile/`, {
+            method: 'GET',
+            credentials: 'include',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        });
+    } catch (error) {
+        console.error("Error fetching user profile: ", error);
+        return null;
+    }
+    if(response.status !== 200) {
+        console.error("Error fetching user profile: ", response);
+        return null;
+    }
+    const data = await response.json();
+    return data;
+}
+
+const signout = async () => {
+    try {
+        await fetch(`${AUTH_API_URL}/users/signout`, {
+            method: 'POST',
+            credentials: 'include'
+        });
+    } catch (error) {
+        console.error(error);
+        throw error;
+    }
+
+    return
 };
-
-// const register = async (username, email, password) => {
-//     const response = await axios.post(`${API_URL}/register`, { username, email, password });
-//     return response.data;
-// };
-
-// const getCurrentUser = () => {
-//     return JSON.parse(localStorage.getItem('user'));
-// };
 
 const AuthService = {
     signinUsernamePassword,
+    getUserProfile,
     signout,
-    // register,
-    // getCurrentUser
 };
 
 export default AuthService;
