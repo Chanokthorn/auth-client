@@ -22,7 +22,7 @@ const signinUsernamePassword = async (apiKey, username, password) => {
 const getUserProfile = async () => {
     var response;
     try {
-        response = await fetch(`${AUTH_API_URL}/users/profile/`, {
+        response = await fetch(`${AUTH_API_URL}/users/profile`, {
             method: 'GET',
             credentials: 'include',
             headers: {
